@@ -17,7 +17,7 @@ export function StatCard({ title, value, percentChange, icon, iconBgColor }: Sta
     <Card>
       <CardContent className="p-5">
         <div className="flex items-center">
-          <div className={`flex-shrink-0 ${iconBgColor} rounded-md p-3`}>
+          <div className={`flex-shrink-0 ${iconBgColor} rounded-md p-3 transition-all duration-300 bg-gradient-to-br from-primary/80 to-primary`}>
             {icon}
           </div>
           <div className="ml-5 w-0 flex-1">
