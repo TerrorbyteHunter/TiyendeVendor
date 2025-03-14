@@ -103,7 +103,7 @@ export class MemStorage implements IStorage {
     // Initialize vendor user data
     const johnUser: InsertVendor = {
       username: "John",
-      password: "$2b$10$FS7Q4VzIgZJ2yeKXLWp4COiSGTPmhMWIF/uEBcvQnJFjFecGOMVVu", // hashed "john123"
+      password: "$2b$10$nTqRMgskP5V/hZFDG2QDee/EI6e3UgXN2fE.wSMCA/wYeBUeN0B.e", // hashed "john123"
       name: "John Doe",
       email: "john@tiyende.co.zm",
       phone: "+260977123456",
