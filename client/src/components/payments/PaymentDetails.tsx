@@ -74,7 +74,7 @@ export function PaymentDetails({ payment, onUpdateStatus, isUpdating }: PaymentD
             )}
           </div>
         </div>
-        <p className="text-xl font-bold">${payment.amount.toFixed(2)}</p>
+        <p className="text-xl font-bold">ZMW {payment.amount.toFixed(2)}</p>
       </div>
 
       <Separator />

@@ -65,7 +65,7 @@ export function BookingDetails({ booking, onUpdateStatus, isUpdating }: BookingD
         </div>
         <div>
           <h3 className="text-sm font-medium text-gray-500">Total Price</h3>
-          <p className="mt-1 text-lg font-semibold">${booking.totalPrice.toFixed(2)}</p>
+          <p className="mt-1 text-lg font-semibold">ZMW {booking.totalPrice.toFixed(2)}</p>
         </div>
       </div>
 

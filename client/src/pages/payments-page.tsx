@@ -4,7 +4,7 @@ import { DashboardLayout } from "@/layouts/DashboardLayout";
 import { DataTable } from "@/components/ui/data-table";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
-import { Loader2, AlertCircle, Eye, CreditCard, DollarSign, Check, X } from "lucide-react";
+import { Loader2, AlertCircle, Eye, CreditCard, DollarSign, Check, X, Clock } from "lucide-react";
 import { Payment } from "@shared/schema";
 import { queryClient, apiRequest } from "@/lib/queryClient";
 import { PaymentDetails } from "@/components/payments/PaymentDetails";
@@ -231,7 +231,7 @@ export default function PaymentsPage() {
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-sm font-medium text-green-800">Total Revenue</p>
-                  <p className="text-3xl font-bold text-green-900">${totalRevenue.toFixed(2)}</p>
+                  <p className="text-3xl font-bold text-green-900">ZMW {totalRevenue.toFixed(2)}</p>
                 </div>
                 <div className="bg-green-100 p-3 rounded-full">
                   <DollarSign className="h-6 w-6 text-green-600" />
@@ -245,7 +245,7 @@ export default function PaymentsPage() {
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-sm font-medium text-yellow-800">Pending Payments</p>
-                  <p className="text-3xl font-bold text-yellow-900">${pendingAmount.toFixed(2)}</p>
+                  <p className="text-3xl font-bold text-yellow-900">ZMW {pendingAmount.toFixed(2)}</p>
                 </div>
                 <div className="bg-yellow-100 p-3 rounded-full">
                   <Clock className="h-6 w-6 text-yellow-600" />
