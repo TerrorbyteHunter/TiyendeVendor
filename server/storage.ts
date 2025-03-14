@@ -100,20 +100,20 @@ export class MemStorage implements IStorage {
       checkPeriod: 86400000 // 24 hours
     });
     
-    // Initialize sample vendor data
-    const sampleVendor: InsertVendor = {
-      username: "tiyende",
-      password: "$2b$10$AIC85OoQWsGk7swQNmfuoe/Gl62ZoHqFYs/bP1lJbmXJ8QBJLsIYu", // hashed "password123"
-      name: "David Mwangi",
-      email: "david@tiyende.co",
-      phone: "+254712345678",
-      companyName: "Tiyende Transport",
-      address: "123 Nairobi Way",
-      city: "Nairobi",
+    // Initialize vendor user data
+    const johnUser: InsertVendor = {
+      username: "John",
+      password: "$2b$10$FS7Q4VzIgZJ2yeKXLWp4COiSGTPmhMWIF/uEBcvQnJFjFecGOMVVu", // hashed "john123"
+      name: "John Doe",
+      email: "john@tiyende.co.zm",
+      phone: "+260977123456",
+      companyName: "Power Tools Bus Service",
+      address: "45 Independence Ave",
+      city: "Lusaka",
       profileImage: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
     };
     
-    this.createVendor(sampleVendor);
+    this.createVendor(johnUser);
   }
 
   // Vendor methods
