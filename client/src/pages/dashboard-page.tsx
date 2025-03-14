@@ -114,7 +114,7 @@ export default function DashboardPage() {
             />
             <StatCard
               title="Revenue (MTD)"
-              value={`$${stats?.revenue.toLocaleString() || 0}`}
+              value={`ZMW ${stats?.revenue.toLocaleString() || 0}`}
               percentChange={stats?.percentChanges.revenue || 0}
               icon={<DollarSign className="h-6 w-6 text-white" />}
               iconBgColor="bg-green-500"
@@ -178,7 +178,7 @@ export default function DashboardPage() {
                               </Avatar>
                               <div className="ml-2">
                                 <div className="text-sm font-medium text-gray-900">Customer #{booking.customerId}</div>
-                                <div className="text-xs text-gray-500">{booking.totalPrice.toFixed(2)} USD</div>
+                                <div className="text-xs text-gray-500">ZMW {booking.totalPrice.toFixed(2)}</div>
                               </div>
                             </div>
                           </td>

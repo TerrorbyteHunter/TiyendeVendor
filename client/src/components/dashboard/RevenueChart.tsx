@@ -54,13 +54,13 @@ export function RevenueChart() {
 
   const formatYAxis = (value: number) => {
     if (value >= 1000) {
-      return `$${value / 1000}K`;
+      return `ZMW ${value / 1000}K`;
     }
-    return `$${value}`;
+    return `ZMW ${value}`;
   };
 
   const formatTooltipValue = (value: number) => {
-    return `$${value.toLocaleString()}`;
+    return `ZMW ${value.toLocaleString()}`;
   };
   
   return (
