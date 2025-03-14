@@ -17,6 +17,7 @@ import { Switch } from "@/components/ui/switch";
 import { Loader2 } from "lucide-react";
 import { insertRouteSchema, Route } from "@shared/schema";
 import { Checkbox } from "@/components/ui/checkbox";
+import { StopsSelector } from "./StopsSelector"; // Added import for StopsSelector
 
 
 // Extend the schema to add validation
@@ -192,34 +193,22 @@ export function RouteForm({ route, onSubmit, isSubmitting, suggestedStops }: Rou
           )}
         />
 
-          {suggestedStops && suggestedStops.length > 0 && (
-            <FormField
-              control={form.control}
-              name="stops"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Stops</FormLabel>
-                  <div className="space-y-2">
-                    {suggestedStops.map((stop, index) => (
-                      <div key={index} className="flex items-center space-x-2">
-                        <Checkbox
-                          checked={field.value?.some(s => s.name === stop.name)}
-                          onCheckedChange={(checked) => {
-                            const newStops = checked
-                              ? [...(field.value || []), stop]
-                              : field.value?.filter(s => s.name !== stop.name) || [];
-                            field.onChange(newStops);
-                          }}
-                        />
-                        <span>{stop.name} ({stop.distanceFromOrigin}km from origin)</span>
-                      </div>
-                    ))}
-                  </div>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+        <FormField
+          control={form.control}
+          name="stops"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Route Stops</FormLabel>
+              <FormControl>
+                <StopsSelector 
+                  stops={field.value || []} 
+                  onChange={field.onChange}
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
           )}
+        />
 
         <div className="flex justify-end">
           <Button type="submit" disabled={isSubmitting}>
@@ -237,3 +226,31 @@ export function RouteForm({ route, onSubmit, isSubmitting, suggestedStops }: Rou
     </Form>
   );
 }
+
+
+// Placeholder StopsSelector component
+const StopsSelector = ({ stops, onChange }: { stops: any[]; onChange: any }) => {
+  const [newStopName, setNewStopName] = useState('');
+  const [newStopDistance, setNewStopDistance] = useState('');
+
+  const addStop = () => {
+    if (newStopName && newStopDistance) {
+      onChange([...stops, { name: newStopName, distanceFromOrigin: parseFloat(newStopDistance) }]);
+      setNewStopName('');
+      setNewStopDistance('');
+    }
+  };
+
+  return (
+    <div>
+      <ul>
+        {stops.map((stop, index) => (
+          <li key={index}>{stop.name} ({stop.distanceFromOrigin}km)</li>
+        ))}
+      </ul>
+      <input type="text" value={newStopName} onChange={e => setNewStopName(e.target.value)} placeholder="Stop Name" />
+      <input type="number" value={newStopDistance} onChange={e => setNewStopDistance(e.target.value)} placeholder="Distance from Origin" />
+      <button onClick={addStop}>Add Stop</button>
+    </div>
+  );
+};
