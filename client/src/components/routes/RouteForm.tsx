@@ -148,11 +148,13 @@ export function RouteForm({ route, onSubmit, isSubmitting }: RouteFormProps) {
                     step="0.5"
                     placeholder="e.g. 6"
                     {...field}
-                    value={field.value || ""}
+                    value={field.value ? (field.value / 60).toString() : ""}
                     onChange={(e) => {
-                      // Store duration in minutes but display in hours in the form
-                      const hoursValue = e.target.value === "" ? undefined : Number(e.target.value);
-                      const minutesValue = hoursValue ? hoursValue * 60 : undefined;
+                      const hoursValue = e.target.value === "" ? undefined : parseFloat(e.target.value);
+                      if (hoursValue !== undefined && (hoursValue < 0 || !isFinite(hoursValue))) {
+                        return;
+                      }
+                      const minutesValue = hoursValue !== undefined ? Math.round(hoursValue * 60) : undefined;
                       field.onChange(minutesValue);
                     }}
                   />
