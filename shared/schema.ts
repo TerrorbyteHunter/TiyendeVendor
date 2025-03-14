@@ -16,6 +16,15 @@ export const vendors = pgTable("vendors", {
   createdAt: timestamp("created_at").defaultNow().notNull(),
 });
 
+export const routeStops = pgTable("route_stops", {
+  id: serial("id").primaryKey(),
+  routeId: integer("route_id").notNull(),
+  name: text("name").notNull(),
+  distanceFromOrigin: doublePrecision("distance_from_origin").notNull(),
+  order: integer("order").notNull(),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+});
+
 export const routes = pgTable("routes", {
   id: serial("id").primaryKey(),
   vendorId: integer("vendor_id").notNull(),
@@ -25,6 +34,7 @@ export const routes = pgTable("routes", {
   duration: integer("duration"), // duration in minutes
   price: doublePrecision("price").notNull(),
   isActive: boolean("is_active").default(true).notNull(),
+  hasStops: boolean("has_stops").default(false).notNull(),
   createdAt: timestamp("created_at").defaultNow().notNull(),
 });
 

@@ -16,6 +16,8 @@ import { Input } from "@/components/ui/input";
 import { Switch } from "@/components/ui/switch";
 import { Loader2 } from "lucide-react";
 import { insertRouteSchema, Route } from "@shared/schema";
+import { Checkbox } from "@/components/ui/checkbox";
+
 
 // Extend the schema to add validation
 const formSchema = insertRouteSchema
@@ -27,6 +29,7 @@ const formSchema = insertRouteSchema
     distance: z.coerce.number().positive("Distance must be a positive number.").optional(),
     duration: z.coerce.number().positive("Duration must be a positive number.").optional(),
     isActive: z.boolean().default(true),
+    stops: z.array(z.object({ name: z.string(), distanceFromOrigin: z.number() })).optional(),
   });
 
 type RouteFormValues = z.infer<typeof formSchema>;
@@ -35,9 +38,10 @@ interface RouteFormProps {
   route?: Route;
   onSubmit: (values: RouteFormValues) => void;
   isSubmitting: boolean;
+  suggestedStops?: { name: string; distanceFromOrigin: number }[];
 }
 
-export function RouteForm({ route, onSubmit, isSubmitting }: RouteFormProps) {
+export function RouteForm({ route, onSubmit, isSubmitting, suggestedStops }: RouteFormProps) {
   const defaultValues: Partial<RouteFormValues> = {
     origin: route?.origin || "",
     destination: route?.destination || "",
@@ -45,6 +49,7 @@ export function RouteForm({ route, onSubmit, isSubmitting }: RouteFormProps) {
     distance: route?.distance || undefined,
     duration: route?.duration || undefined,
     isActive: route?.isActive !== undefined ? route.isActive : true,
+    stops: route?.stops || [],
   };
 
   const form = useForm<RouteFormValues>({
@@ -186,6 +191,35 @@ export function RouteForm({ route, onSubmit, isSubmitting }: RouteFormProps) {
             </FormItem>
           )}
         />
+
+          {suggestedStops && suggestedStops.length > 0 && (
+            <FormField
+              control={form.control}
+              name="stops"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Stops</FormLabel>
+                  <div className="space-y-2">
+                    {suggestedStops.map((stop, index) => (
+                      <div key={index} className="flex items-center space-x-2">
+                        <Checkbox
+                          checked={field.value?.some(s => s.name === stop.name)}
+                          onCheckedChange={(checked) => {
+                            const newStops = checked
+                              ? [...(field.value || []), stop]
+                              : field.value?.filter(s => s.name !== stop.name) || [];
+                            field.onChange(newStops);
+                          }}
+                        />
+                        <span>{stop.name} ({stop.distanceFromOrigin}km from origin)</span>
+                      </div>
+                    ))}
+                  </div>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          )}
 
         <div className="flex justify-end">
           <Button type="submit" disabled={isSubmitting}>
