@@ -1,26 +1,26 @@
-import { useEffect } from 'react';
+
+import { useState } from 'react';
 import { useLocation } from 'wouter';
-import { useAuth } from '@/hooks/use-auth';
 import LoginForm from '@/components/auth/LoginForm';
 import RegisterForm from '@/components/auth/RegisterForm';
 
-const AuthPage = ({ view = 'login' }: { view?: 'login' | 'register' }) => {
+export default function AuthPage() {
+  const [isLogin, setIsLogin] = useState(true);
   const [, setLocation] = useLocation();
-  const { isAuthenticated } = useAuth();
-
-  useEffect(() => {
-    if (isAuthenticated) {
-      setLocation('/dashboard');
-    }
-  }, [isAuthenticated, setLocation]);
 
   return (
-    <div className="flex min-h-screen items-center justify-center">
-      <div className="w-full max-w-md space-y-8 px-4 py-8">
-        {view === 'login' ? <LoginForm /> : <RegisterForm />}
+    <div className="min-h-screen flex items-center justify-center bg-gray-50">
+      <div className="max-w-md w-full space-y-8 p-6 bg-white rounded-xl shadow-lg">
+        {isLogin ? <LoginForm /> : <RegisterForm />}
+        <div className="text-center mt-4">
+          <button
+            onClick={() => setIsLogin(!isLogin)}
+            className="text-sm text-blue-600 hover:text-blue-800"
+          >
+            {isLogin ? "Need an account? Register" : "Already have an account? Login"}
+          </button>
+        </div>
       </div>
     </div>
   );
-};
-
-export default AuthPage;
+}
