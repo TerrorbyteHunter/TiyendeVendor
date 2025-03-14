@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { DashboardLayout } from "@/layouts/DashboardLayout";
 import { useToast } from "@/hooks/use-toast";
@@ -19,10 +19,12 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Loader2, Save, User } from "lucide-react";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Loader2, Save, User, Mail, Phone } from "lucide-react";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Separator } from "@/components/ui/separator";
+import { Badge } from "@/components/ui/badge";
+import { AlertCircle } from "lucide-react";
 
 // Profile update schema
 const profileSchema = z.object({
@@ -86,7 +88,7 @@ export default function ProfilePage() {
   });
 
   // Update form values when profile data is loaded
-  React.useEffect(() => {
+  useEffect(() => {
     if (profile) {
       form.reset({
         name: profile.name || "",
@@ -288,6 +290,62 @@ export default function ProfilePage() {
               </div>
             </div>
           </CardContent>
+        </Card>
+        
+        {/* Admin Contact Card */}
+        <Card>
+          <CardHeader>
+            <CardTitle className="text-xl font-bold">Need Help?</CardTitle>
+            <CardDescription>
+              Contact the Tiyende administrator for support
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <div className="bg-blue-50 p-4 rounded-lg border border-blue-100 mb-4">
+              <div className="flex items-start">
+                <AlertCircle className="h-5 w-5 text-blue-500 mt-0.5 mr-2" />
+                <p className="text-sm text-blue-700">
+                  If you need assistance with your account or have questions about using the platform, 
+                  please contact our administrator using the information below.
+                </p>
+              </div>
+            </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="flex items-center">
+                <Mail className="h-5 w-5 text-gray-500 mr-3" />
+                <div>
+                  <h3 className="text-sm font-medium">Email</h3>
+                  <a 
+                    href="mailto:Lytonechibona@gmail.com" 
+                    className="mt-1 text-blue-600 hover:underline"
+                  >
+                    Lytonechibona@gmail.com
+                  </a>
+                </div>
+              </div>
+              
+              <div className="flex items-center">
+                <Phone className="h-5 w-5 text-gray-500 mr-3" />
+                <div>
+                  <h3 className="text-sm font-medium">WhatsApp</h3>
+                  <a 
+                    href="https://wa.me/260978838939" 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    className="mt-1 text-blue-600 hover:underline"
+                  >
+                    +260 978 838 939
+                  </a>
+                </div>
+              </div>
+            </div>
+          </CardContent>
+          <CardFooter className="bg-gray-50 border-t">
+            <div className="w-full text-center text-sm text-gray-600">
+              Office hours: Monday-Friday, 8:00 AM - 5:00 PM (CAT)
+            </div>
+          </CardFooter>
         </Card>
       </div>
     </DashboardLayout>

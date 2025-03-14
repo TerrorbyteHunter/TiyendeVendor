@@ -157,7 +157,7 @@ export default function RoutesPage() {
       cell: (route: Route) => (
         <span>
           {route.duration
-            ? `${Math.floor(route.duration / 60)}h ${route.duration % 60}m`
+            ? `${(route.duration / 60).toFixed(1)} hours`
             : "N/A"}
         </span>
       ),

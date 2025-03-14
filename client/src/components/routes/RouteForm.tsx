@@ -140,16 +140,20 @@ export function RouteForm({ route, onSubmit, isSubmitting }: RouteFormProps) {
             name="duration"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Duration (minutes)</FormLabel>
+                <FormLabel>Duration (hours)</FormLabel>
                 <FormControl>
                   <Input
                     type="number"
                     min="0"
-                    placeholder="e.g. 360"
+                    step="0.5"
+                    placeholder="e.g. 6"
                     {...field}
                     value={field.value || ""}
                     onChange={(e) => {
-                      field.onChange(e.target.value === "" ? undefined : Number(e.target.value));
+                      // Store duration in minutes but display in hours in the form
+                      const hoursValue = e.target.value === "" ? undefined : Number(e.target.value);
+                      const minutesValue = hoursValue ? hoursValue * 60 : undefined;
+                      field.onChange(minutesValue);
                     }}
                   />
                 </FormControl>
