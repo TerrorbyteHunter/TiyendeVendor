@@ -228,29 +228,3 @@ export function RouteForm({ route, onSubmit, isSubmitting, suggestedStops }: Rou
 }
 
 
-// Placeholder StopsSelector component
-const StopsSelector = ({ stops, onChange }: { stops: any[]; onChange: any }) => {
-  const [newStopName, setNewStopName] = useState('');
-  const [newStopDistance, setNewStopDistance] = useState('');
-
-  const addStop = () => {
-    if (newStopName && newStopDistance) {
-      onChange([...stops, { name: newStopName, distanceFromOrigin: parseFloat(newStopDistance) }]);
-      setNewStopName('');
-      setNewStopDistance('');
-    }
-  };
-
-  return (
-    <div>
-      <ul>
-        {stops.map((stop, index) => (
-          <li key={index}>{stop.name} ({stop.distanceFromOrigin}km)</li>
-        ))}
-      </ul>
-      <input type="text" value={newStopName} onChange={e => setNewStopName(e.target.value)} placeholder="Stop Name" />
-      <input type="number" value={newStopDistance} onChange={e => setNewStopDistance(e.target.value)} placeholder="Distance from Origin" />
-      <button onClick={addStop}>Add Stop</button>
-    </div>
-  );
-};
