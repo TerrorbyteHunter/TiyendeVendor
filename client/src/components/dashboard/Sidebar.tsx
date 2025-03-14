@@ -17,7 +17,7 @@ import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Separator } from "@/components/ui/separator";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { clsx } from "clsx";
+import cn from 'classnames'; // Assuming classnames library is used
 
 interface SidebarProps {
   isOpen: boolean;
@@ -34,9 +34,9 @@ export function Sidebar({ isOpen, toggleSidebar, currentPath }: SidebarProps) {
 
   return (
     <aside 
-      className={clsx("bg-gray-900 text-white w-full md:w-64 md:flex md:flex-col md:min-h-screen transition-all duration-300 fixed md:relative z-50 transform md:transform-none",
+      className={`bg-gray-900 text-white w-full md:w-64 md:flex md:flex-col md:min-h-screen transition-all duration-300 fixed md:relative z-50 transform md:transform-none ${
         isOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0"
-      )}
+      }`}
     >
       <div className="p-4 flex items-center justify-between">
         <div className="flex items-center space-x-2">
@@ -155,7 +155,7 @@ interface SidebarItemProps {
 function SidebarItem({ href, icon, label, isActive }: SidebarItemProps) {
   return (
     <li>
-      <Link href={href} className={clsx(
+      <Link href={href} className={cn(
         "flex items-center gap-3 rounded-lg px-3 py-2 text-gray-500 transition-all hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-50",
         isActive && "bg-gray-800 text-white"
       )}>
