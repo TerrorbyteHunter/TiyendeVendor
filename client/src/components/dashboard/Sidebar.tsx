@@ -17,7 +17,6 @@ import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Separator } from "@/components/ui/separator";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import cn from 'classnames'; // Assuming classnames library is used
 
 interface SidebarProps {
   isOpen: boolean;
@@ -27,7 +26,7 @@ interface SidebarProps {
 
 export function Sidebar({ isOpen, toggleSidebar, currentPath }: SidebarProps) {
   const { vendor, logoutMutation } = useAuth();
-
+  
   const handleLogout = () => {
     logoutMutation.mutate();
   };
@@ -54,7 +53,7 @@ export function Sidebar({ isOpen, toggleSidebar, currentPath }: SidebarProps) {
           <X className="h-6 w-6" />
         </Button>
       </div>
-
+      
       <div className="px-4 py-2">
         <div className="bg-gray-800 rounded-lg p-3 flex items-center space-x-3">
           <Avatar>
@@ -67,7 +66,7 @@ export function Sidebar({ isOpen, toggleSidebar, currentPath }: SidebarProps) {
           </div>
         </div>
       </div>
-
+      
       <ScrollArea className="flex-1 overflow-y-auto">
         <nav className="mt-4">
           <div className="px-4 py-2">
@@ -105,7 +104,7 @@ export function Sidebar({ isOpen, toggleSidebar, currentPath }: SidebarProps) {
               />
             </ul>
           </div>
-
+          
           <div className="px-4 py-2 mt-4">
             <h2 className="text-xs uppercase tracking-wider text-gray-400 font-semibold">Account</h2>
             <ul className="mt-2 space-y-1">
@@ -131,7 +130,7 @@ export function Sidebar({ isOpen, toggleSidebar, currentPath }: SidebarProps) {
           </div>
         </nav>
       </ScrollArea>
-
+      
       <div className="p-4 border-t border-gray-700">
         <button
           onClick={handleLogout}
@@ -155,12 +154,15 @@ interface SidebarItemProps {
 function SidebarItem({ href, icon, label, isActive }: SidebarItemProps) {
   return (
     <li>
-      <Link href={href} className={cn(
-        "flex items-center gap-3 rounded-lg px-3 py-2 text-gray-500 transition-all hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-50",
-        isActive && "bg-gray-800 text-white"
-      )}>
-        {icon && <span className="h-4 w-4">{icon}</span>}
-        {label}
+      <Link href={href}>
+        <a className={`flex items-center px-3 py-2 text-sm font-medium rounded-md ${
+          isActive
+            ? "bg-gray-800 text-white"
+            : "text-gray-300 hover:bg-gray-800 hover:text-white"
+        }`}>
+          <span className="mr-3">{icon}</span>
+          {label}
+        </a>
       </Link>
     </li>
   );
