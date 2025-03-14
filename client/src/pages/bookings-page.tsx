@@ -123,7 +123,7 @@ export default function BookingsPage() {
     {
       header: "Total Price",
       accessorKey: "totalPrice",
-      cell: (booking: Booking) => <span>${booking.totalPrice.toFixed(2)}</span>,
+      cell: (booking: Booking) => <span>ZMW {booking.totalPrice.toFixed(2)}</span>,
     },
     {
       header: "Booking Date",
