@@ -148,7 +148,7 @@ export default function PaymentsPage() {
     {
       header: "Amount",
       accessorKey: "amount",
-      cell: (payment: Payment) => <span className="font-medium">${payment.amount.toFixed(2)}</span>,
+      cell: (payment: Payment) => <span className="font-medium">ZMW {payment.amount.toFixed(2)}</span>,
     },
     {
       header: "Payment Method",

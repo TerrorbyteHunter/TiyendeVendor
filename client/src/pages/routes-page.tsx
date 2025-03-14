@@ -165,7 +165,7 @@ export default function RoutesPage() {
     {
       header: "Price",
       accessorKey: "price",
-      cell: (route: Route) => <span>${route.price}</span>,
+      cell: (route: Route) => <span>ZMW {route.price}</span>,
     },
     {
       header: "Status",

@@ -67,7 +67,7 @@ export function RouteForm({ route, onSubmit, isSubmitting }: RouteFormProps) {
               <FormItem>
                 <FormLabel>Origin</FormLabel>
                 <FormControl>
-                  <Input placeholder="e.g. Nairobi" {...field} />
+                  <Input placeholder="e.g. Lusaka" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -81,7 +81,7 @@ export function RouteForm({ route, onSubmit, isSubmitting }: RouteFormProps) {
               <FormItem>
                 <FormLabel>Destination</FormLabel>
                 <FormControl>
-                  <Input placeholder="e.g. Mombasa" {...field} />
+                  <Input placeholder="e.g. Ndola" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -95,7 +95,7 @@ export function RouteForm({ route, onSubmit, isSubmitting }: RouteFormProps) {
             name="price"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Price ($)</FormLabel>
+                <FormLabel>Price (ZMW)</FormLabel>
                 <FormControl>
                   <Input
                     type="number"
