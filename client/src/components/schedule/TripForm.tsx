@@ -317,7 +317,7 @@ export function TripForm({ trip, routes, buses, onSubmit, isSubmitting, onDelete
             name="price"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Ticket Price ($)</FormLabel>
+                <FormLabel>Ticket Price (ZMW)</FormLabel>
                 <FormControl>
                   <Input
                     type="number"
